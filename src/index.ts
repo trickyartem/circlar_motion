@@ -1,12 +1,11 @@
-import Shape from "./Shape";
+import Shape from "./shape";
 import {canvas} from "./canvas";
 import Utils from "./utils";
+import {colors} from "./config";
 
 const {c} = canvas;
 let {width, height} = canvas.canvas;
 
-console.log('hi');
-const colors = ['#2185C5', '#7ECEFD', '#FF7F66', '#6C3483', '#D35400', '#FA8072'];
 let mouse = {x: 0, y: 0};
 
 addEventListener('mousemove', (event) => {
