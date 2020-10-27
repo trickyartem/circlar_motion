@@ -10,9 +10,7 @@
   "author": "me",
   "license": "ISC",
   "dependencies": {
-    "express": "latest"
-  },
-  "devDependencies": {
+    "express": "latest",
     "@babel/core": "^7.0.0-beta.56",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
