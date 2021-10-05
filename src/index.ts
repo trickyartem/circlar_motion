@@ -1,50 +1,53 @@
-import Shape from "./shape";
-import {canvas} from "./canvas";
+import Shape from "./Shape";
 import Utils from "./utils";
-import {colors} from "./config";
+import { Canvas } from "./Canvas";
+import Config from "./Config";
 
-const {c} = canvas;
-let {width, height} = canvas.canvas;
+const canvas = new Canvas({
+	width: window.innerWidth,
+	height: window.innerHeight
+});
+const { width, height } = canvas.getSize();
 
-let mouse = {x: 0, y: 0};
+let mouse = { x: 0, y: 0 };
 
 addEventListener('mousemove', (event) => {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
+	mouse.x = event.clientX;
+	mouse.y = event.clientY;
 });
 
 addEventListener('resize', () => {
-    canvas.canvas.width = window.innerWidth;
-    canvas.canvas.height = window.innerHeight;
+	canvas.canvas.width = window.innerWidth;
+	canvas.canvas.height = window.innerHeight;
 
-    init();
+	init();
 });
 
-let particles: Array<Shape> = [];
+let particles: Shape[] = [];
 
 function init() {
-    particles = [];
+	particles = [];
 
-    for (let i = 0; i < 2500; i++) {
-        let radius = Utils.randomIntFromRange(1, 5);
-        let x = width / 2;
-        let y = height / 2;
-        let color = Utils.pick_random_thing(colors);
+	for (let i = 0; i < 2500; i++) {
+		let radius = Utils.randomIntFromRange(1, 5);
+		let x = width / 2;
+		let y = height / 2;
+		let color = Utils.pick_random_thing(Config.colors);
 
-        particles.push(new Shape(x, y, radius, color));
-    }
+		particles.push(new Shape(canvas, x, y, radius, color));
+	}
 }
 
 const animate = () => {
-    c.clearRect(0, 0, innerWidth, innerHeight);
-    c.fillStyle = 'rgba(225, 225, 225, 0.1)';
-    c.fillRect(0, 0, width, height);
+	canvas.c.clearRect(0, 0, innerWidth, innerHeight);
+	canvas.c.fillStyle = 'rgba(225, 225, 225, 0.1)';
+	canvas.c.fillRect(0, 0, width, height);
 
-    for (const particle of particles) {
-        particle.update();
-    }
+	for (const particle of particles) {
+		particle.update();
+	}
 
-    requestAnimationFrame(animate);
+	requestAnimationFrame(animate);
 };
 
 init();
