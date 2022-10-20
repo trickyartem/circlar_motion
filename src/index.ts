@@ -1,5 +1,5 @@
 import Shape from "./Shape";
-import Utils from "./utils";
+import { pickRandomItem, randomIntFromRange } from "./utils";
 import { Canvas } from "./Canvas";
 import Config from "./Config";
 
@@ -29,10 +29,10 @@ function init() {
 	particles = [];
 
 	for (let i = 0; i < 2500; i++) {
-		let radius = Utils.randomIntFromRange(1, 5);
+		let radius = randomIntFromRange(1, 5);
 		let x = width / 2;
 		let y = height / 2;
-		let color = Utils.pick_random_thing(Config.colors);
+		let color = pickRandomItem(Config.colors);
 
 		particles.push(new Shape(canvas, x, y, radius, color));
 	}
