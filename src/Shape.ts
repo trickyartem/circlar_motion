@@ -47,10 +47,8 @@ class Shape {
 		};
 		let { x, y } = this.center_pos;
 		const { distance_from_center, radians, directions, velocity } = this;
-		if (x + distance_from_center > width || x - distance_from_center < 0) {
+		if (this.isInViewbox(x, y)) {
 			this.directions.x *= -1
-		}
-		if (y + distance_from_center > height || y - distance_from_center < 0) {
 			this.directions.y *= -1
 		}
 
@@ -66,6 +64,17 @@ class Shape {
 		this.y = y + Math.sin(radians) * distance_from_center;
 
 		this.draw(last_position);
+	}
+	
+	private isInViewbox(x: number, y: number) {
+		if (x + distance_from_center > width || x - distance_from_center < 0) {
+			return false;
+		}
+		if (y + distance_from_center > height || y - distance_from_center < 0) {
+			return false;
+		}
+		
+		return true;
 	}
 }
 
